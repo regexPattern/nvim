@@ -51,6 +51,9 @@ return {
           null.builtins.formatting.prettierd,
           null.builtins.formatting.rustfmt,
         },
+        on_attach = function(client, bufnr)
+          vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+        end
       })
     end,
   },

@@ -84,5 +84,11 @@ return {
         })
       end,
     },
+    {
+      "z=",
+      function()
+        require("telescope.builtin").spell_suggest()
+      end,
+    },
   },
 }
