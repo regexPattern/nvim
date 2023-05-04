@@ -2,17 +2,13 @@ local lspconfig = require("lspconfig")
 local lsp_defaults = lspconfig.util.default_config
 
 -- populate default capabilities with autocompletion capabilities that are
--- going to be used by all the servers. only if `cmp` is installed.
+-- going to be used by all the servers.
 --
-local cmp_ok, cmp = pcall(require, "cmp_nvim_lsp")
-
-if cmp_ok then
-  lsp_defaults.capabilities = vim.tbl_deep_extend(
-    "force",
-    lsp_defaults.capabilities,
-    cmp.default_capabilities()
-  )
-end
+lsp_defaults.capabilities = vim.tbl_deep_extend(
+  "force",
+  lsp_defaults.capabilities,
+  require("cmp_nvim_lsp").default_capabilities()
+)
 
 -- handlers
 --

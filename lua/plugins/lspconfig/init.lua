@@ -19,33 +19,33 @@ return {
           },
         },
       },
-
-      -- required if you want to have completions for json schemas for example.
       "hrsh7th/cmp-nvim-lsp",
 
-      -- TODO: Clean these docs.
-      -- optional dependencies that are not essential for the lsp experience of
-      -- are specific for language-specific setups.
+      -- OPTIONAL: plugins you can enable or disable as you like.
       --
-      -- "simrat39/rust-tools.nvim",
-
-      -- {
-      --   "SmiteshP/nvim-navic",
-      --   config = {
-      --     icons = require("plugins.lspconfig.icons"),
-      --   },
-      -- },
-
-      "b0o/SchemaStore.nvim",
-      "jose-elias-alvarez/typescript.nvim",
-      { "lvimuser/lsp-inlayhints.nvim", config = true },
+      { "b0o/SchemaStore.nvim", enabled = true },
+      { "jose-elias-alvarez/typescript.nvim", enabled = false },
+      { "simrat39/rust-tools.nvim", enabled = false },
+      {
+        "SmiteshP/nvim-navic",
+        enabled = false,
+        config = {
+          icons = require("plugins.lspconfig.icons"),
+        },
+      },
+      {
+        "lvimuser/lsp-inlayhints.nvim",
+        enabled = true,
+        config = true,
+      },
       {
         "akinsho/flutter-tools.nvim",
+        enabled = false,
         dependencies = { "nvim-lua/plenary.nvim" },
       },
     },
     config = function()
-      -- warning: require this before setting up the servers because this
+      -- WARNING: require this before setting up the servers because this
       -- overrides the lspconfig default settings that are going to be
       -- automatically set for every server.
       --
@@ -63,7 +63,15 @@ return {
         ["rust_analyzer"] = function()
           local rust_tools_ok, rust_tools = pcall(require, "rust-tools")
           if rust_tools_ok then
-            rust_tools.setup({})
+            rust_tools.setup({
+              tools = {
+                inlay_hints = {
+                  -- if `lsp-inlayhints` is available, use that plugin to
+                  -- provide inlay hints instead.
+                  auto = not pcall(require, "lsp-inlayhints"),
+                },
+              },
+            })
           else
             lspconfig.rust_analyzer.setup({})
           end

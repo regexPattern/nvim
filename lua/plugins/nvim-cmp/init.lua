@@ -2,7 +2,6 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    -- required snippet engine.
     {
       "L3MON4D3/LuaSnip",
       config = function()
@@ -15,7 +14,7 @@ return {
     },
     "saadparwaiz1/cmp_luasnip",
 
-    -- sources
+    -- completion sources
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
