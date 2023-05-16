@@ -6,6 +6,11 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
+    {
+      "s1n7ax/nvim-window-picker",
+      version = "v1.*",
+      config = true,
+    },
   },
   config = {
     sources = {
@@ -24,11 +29,13 @@ return {
       position = "left",
       width = 30,
       mappings = {
-        ["<CR>"] = "open",
+        ["<CR>"] = "open_with_window_picker",
         ["R"] = "rename",
         ["D"] = "delete",
         ["%"] = "add",
         ["d"] = "add_directory",
+        ["<C-v>"] = "vsplit_with_window_picker",
+        ["<C-x>"] = "split_with_window_picker",
       },
     },
     filesystem = {
@@ -37,7 +44,7 @@ return {
         hide_dotfiles = false,
         hide_gitignored = false,
       },
-      follow_current_file = false,
+      follow_current_file = true,
       hijack_netrw_behavior = "disabled",
     },
     default_component_configs = {
@@ -62,6 +69,6 @@ return {
     vim.g.neo_tree_remove_legacy_commands = 1
   end,
   keys = {
-    { "<Leader>E", ":Neotree toggle<CR>", silent = true },
+    { "<Leader>ne", ":Neotree toggle<CR>", silent = true },
   },
 }

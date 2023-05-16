@@ -1,6 +1,5 @@
-vim.keymap.set("n", "<C-Enter>", function()
-  local rest_ok, rest = pcall(require, "rest-nvim")
-  if rest_ok then
-    rest.run()
-  end
+vim.keymap.set("n", "<Enter>", function()
+  pcall(function()
+    require("rest-nvim").run()
+  end)
 end, { buffer = true })

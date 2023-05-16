@@ -1,16 +1,6 @@
--- add neovim runtime as `lua_ls` workspace.
---
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-
--- add json schemas to `jsonls`.
---
-local json_schemas = {}
-local schemastore_ok, schemastore = pcall(require, "schemastore")
-if schemastore_ok then
-  json_schemas = schemastore.json.schemas()
-end
 
 return {
   lua_ls = {
@@ -36,7 +26,7 @@ return {
   jsonls = {
     settings = {
       json = {
-        schemas = json_schemas,
+        schemas = require("schemastore").json.schemas(),
         validate = { enable = true },
       },
     },
@@ -53,7 +43,7 @@ return {
           includeInlayPropertyDeclarationTypeHints = true,
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
-        }
+        },
       },
       javascript = {
         inlayHints = {
@@ -65,8 +55,8 @@ return {
           includeInlayPropertyDeclarationTypeHints = true,
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
-        }
-      }
-    }
+        },
+      },
+    },
   },
 }

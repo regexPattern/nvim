@@ -5,8 +5,7 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "JoosepAlviste/nvim-ts-context-commentstring",
-
-    -- optional dependencies.
+    "windwp/nvim-ts-autotag",
     {
       "Darazaki/indent-o-matic",
       config = {
@@ -19,8 +18,13 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup({
       highlight = { enable = true },
-      indent = { enable = true },
+      indent = {
+        enable = true,
+        -- disable = { "svelte" },
+        -- additional_vim_regex_highlighting = { "svelte" },
+      },
       context_commentstring = { enable = true },
+      autotag = { enable = false },
       ensure_installed = {
         "lua",
         "rust",

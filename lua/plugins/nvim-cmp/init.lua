@@ -1,5 +1,5 @@
 return {
-  "hrsh7th/nvim-cmp",
+ "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
     {
@@ -13,12 +13,13 @@ return {
       end,
     },
     "saadparwaiz1/cmp_luasnip",
-
-    -- completion sources
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
-    "mtoohey31/cmp-fish",
+    {
+      "mtoohey31/cmp-fish",
+      ft = "fish",
+    },
   },
   config = function()
     local cmp = require("cmp")
@@ -27,22 +28,30 @@ return {
 
     local custom_compare = require("plugins.nvim-cmp.sorting")
 
+    local select_opts = {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }
+
     require("cmp").setup({
+      completion = {
+        completeopt = "menu,menuone,noinsert",
+      },
       mapping = {
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-y>"] = cmp.mapping.confirm(select_opts),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<C-p>"] = cmp.mapping(function()
           if cmp.visible() then
-            cmp.select_prev_item({ select = true })
+            cmp.select_prev_item(select_opts)
           else
             cmp.complete()
           end
         end),
         ["<C-n>"] = cmp.mapping(function()
           if cmp.visible() then
-            cmp.select_next_item({ select = true })
+            cmp.select_next_item(select_opts)
           else
             cmp.complete()
           end
@@ -67,13 +76,6 @@ return {
         {
           name = "path",
           option = {
-            -- paths for files used at runtime are resolved relative to the
-            -- directory from where you run the binary, but most of the time
-            -- i'm editing a rust file, i'm in a cargo project, that means that
-            -- i run the binary relative to the binary crate's root. source
-            -- files are nested under a 'src' directory, so completing file
-            -- paths relative to each file isn't useful.
-            --
             get_cwd = function(params)
               local filetype = vim.api.nvim_buf_get_option(0, "filetype")
               if filetype == "rust" then
@@ -84,6 +86,7 @@ return {
             end,
           },
         },
+        { name = "fish" },
         { name = "luasnip" },
         {
           name = "buffer",
@@ -142,5 +145,6 @@ return {
   end,
   init = function()
     vim.o.pumheight = 15
+    vim.opt.completeopt:remove({ "preview" })
   end,
 }
