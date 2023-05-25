@@ -17,7 +17,9 @@ return {
       "b0o/SchemaStore.nvim",
       {
         "lvimuser/lsp-inlayhints.nvim",
-        config = true,
+        config = {
+          enabled_at_startup = true,
+        },
       },
       {
         "akinsho/flutter-tools.nvim",

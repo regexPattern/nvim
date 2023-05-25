@@ -7,5 +7,11 @@ return {
       names = false,
       tailwind = "lsp",
     },
+    buftypes = {
+      "*",
+      "!nofile",
+      "!popup",
+      "!prompt",
+    },
   },
 }

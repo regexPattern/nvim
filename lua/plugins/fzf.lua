@@ -24,8 +24,10 @@ return {
   end,
   keys = {
     { "<Leader>ff", ":FzfLua files<CR>", silent = true },
+    { "<Leader>fb", ":FzfLua buffers<CR>", silent = true },
     { "<Leader>fg", ":FzfLua live_grep<CR>", silent = true },
     { "<Leader>fw", ":FzfLua grep_cword<CR>", silent = true },
+    { "z=", ":FzfLua spell_suggest<CR>", silent = true },
     {
       "<Leader>nv",
       ":FzfLua files cwd=" .. vim.fn.stdpath("config") .. "<CR>",
