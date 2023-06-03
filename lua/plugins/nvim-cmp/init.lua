@@ -29,13 +29,13 @@ return {
     local custom_compare = require("plugins.nvim-cmp.sorting")
 
     local select_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
+      behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }
 
     require("cmp").setup({
       completion = {
-        completeopt = "menu,menuone,noinsert",
+        completeopt = "menu,menuone,noselect",
       },
       mapping = {
         ["<C-d>"] = cmp.mapping.scroll_docs(4),

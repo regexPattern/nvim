@@ -1,6 +1,4 @@
 -- Indentation
--- Pretty complex topic in Vim
--- https://vim.fandom.com/wiki/Indenting_source_code
 vim.opt.autoindent = true
 vim.opt.expandtab = false
 vim.opt.shiftwidth = 4

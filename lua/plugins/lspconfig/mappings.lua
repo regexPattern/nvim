@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = args.buf })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf })
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = args.buf })
-    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = args.buf })
+    vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { buffer = args.buf })
     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { buffer = args.buf })
     vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { buffer = args.buf })
     vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, { buffer = args.buf })
