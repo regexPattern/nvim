@@ -69,6 +69,6 @@ return {
     vim.g.neo_tree_remove_legacy_commands = 1
   end,
   keys = {
-    { "<Leader>ne", ":Neotree toggle<CR>", silent = true },
+    { "<Leader>E", ":Neotree toggle<CR>", silent = true },
   },
 }

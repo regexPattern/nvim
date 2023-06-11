@@ -1,5 +1,5 @@
 return {
- "hrsh7th/nvim-cmp",
+  "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
     {
@@ -23,9 +23,9 @@ return {
   },
   config = function()
     local cmp = require("cmp")
-    local compare = require("cmp.config.compare")
     local luasnip = require("luasnip")
 
+    local compare = require("cmp.config.compare")
     local custom_compare = require("plugins.nvim-cmp.sorting")
 
     local select_opts = {
@@ -34,9 +34,6 @@ return {
     }
 
     require("cmp").setup({
-      completion = {
-        completeopt = "menu,menuone,noselect",
-      },
       mapping = {
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
@@ -102,18 +99,18 @@ return {
           },
         },
       },
-      -- sorting = {
-      --   priority_weight = 2,
-      --   comparators = {
-      --     compare.offset,
-      --     compare.score,
-      --     custom_compare.label,
-      --     custom_compare.kind,
-      --     compare.sort_text,
-      --     compare.recently_used,
-      --     compare.locality,
-      --   },
-      -- },
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          compare.offset,
+          compare.score,
+          custom_compare.label,
+          custom_compare.kind,
+          compare.sort_text,
+          compare.recently_used,
+          compare.locality,
+        },
+      },
       window = {
         completion = { border = "none" },
         documentation = {
@@ -142,9 +139,5 @@ return {
         end,
       },
     })
-  end,
-  init = function()
-    vim.o.pumheight = 15
-    vim.opt.completeopt:remove({ "preview" })
   end,
 }

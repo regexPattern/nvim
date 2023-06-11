@@ -1,7 +1,7 @@
 return {
   "ibhagwan/fzf-lua",
   cmd = "FzfLua",
-  dependencies = {{ "nvim-tree/nvim-web-devicons", config = true }},
+  dependencies = { { "nvim-tree/nvim-web-devicons", config = true } },
   config = function()
     local fzf = require("fzf-lua")
 
@@ -34,5 +34,13 @@ return {
       silent = true,
     },
     { "<Leader>df", ":FzfLua files cwd=~/.dotfiles<CR>", silent = true },
+    {
+      "<Leader>fe",
+      function()
+        local searched_ext = vim.fn.input("Extension: ")
+        require("fzf-lua").files({ cmd = "fd -e " .. searched_ext })
+      end,
+      silent = true,
+    },
   },
 }

@@ -21,11 +21,6 @@ return {
           enabled_at_startup = true,
         },
       },
-      {
-        "akinsho/flutter-tools.nvim",
-        enabled = false,
-        dependencies = { "nvim-lua/plenary.nvim" },
-      },
     },
     config = function()
       require("plugins.lspconfig.handlers")
@@ -39,11 +34,6 @@ return {
           require("lspconfig")[server_name].setup(opts)
         end,
       })
-
-      local flutter_tools_ok, flutter_tools = pcall(require, "flutter-tools")
-      if flutter_tools_ok then
-        flutter_tools.setup({})
-      end
     end,
   },
   {
@@ -55,17 +45,47 @@ return {
     },
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    "mhartington/formatter.nvim",
+    cmd = "Format",
     config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.prettierd.with({ extra_filetypes = { "svelte" } }),
-          null_ls.builtins.formatting.rustfmt,
-          null_ls.builtins.formatting.stylua,
+      require("formatter").setup({
+        filetype = {
+          lua = {
+            require("formatter.filetypes.lua").stylua,
+          },
+          html = {
+            require("formatter.filetypes.html").prettier,
+          },
+          css = {
+            require("formatter.filetypes.css").prettier,
+          },
+          svelte = {
+            require("formatter.filetypes.svelte").prettier,
+          },
+          json = {
+            require("formatter.filetypes.json").prettierd,
+          },
+          jsonc = {
+            require("formatter.filetypes.json").prettierd,
+          },
+          javascript = {
+            require("formatter.filetypes.javascript").prettier,
+          },
+          typescript = {
+            require("formatter.filetypes.typescript").prettier,
+          },
         },
       })
+    end,
+    keys = {
+      { "<Leader>x", ":Format<CR>", silent = true },
+    },
+  },
+  {
+    "onsails/diaglist.nvim",
+    event = "LspAttach",
+    config = function()
+      require("diaglist").init({})
     end,
   },
 }

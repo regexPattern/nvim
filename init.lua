@@ -1,6 +1,9 @@
+-- Plugin agnostic settings
 require("core.settings")
 require("core.mappings")
+require("core.commands")
 
+-- Plugin and plugin manager (Lazy.nvim) setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -19,5 +22,5 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
   change_detection = { notify = false },
   default = { lazy = true },
-  install = { colorscheme = { "catppuccin-mocha" }},
+  install = { colorscheme = { "nord" } },
 })

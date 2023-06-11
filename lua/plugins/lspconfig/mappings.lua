@@ -13,14 +13,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { buffer = args.buf })
     vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, { buffer = args.buf })
     vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, { buffer = args.buf })
-    vim.keymap.set("n", "<Leader>x", function()
-      vim.lsp.buf.format({
-        async = false,
-        filter = function(client)
-          return client.name == "null-ls"
-        end,
-        bufnr = args.buf,
-      })
+
+    vim.keymap.set("n", "<Leader>wd", function()
+      require("diaglist").open_all_diagnostics()
     end, { buffer = args.buf })
+
+    -- vim.keymap.set("n", "<Leader>x", function()
+    --   vim.lsp.buf.format({
+    --     -- filter = function(client)
+    --     --   return client.name == "null-ls"
+    --     -- end,
+    --     bufnr = args.buf,
+    --   })
+    -- end, { buffer = args.buf })
   end,
 })
