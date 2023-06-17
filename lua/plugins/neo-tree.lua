@@ -27,7 +27,7 @@ return {
     use_default_mappings = false,
     window = {
       position = "left",
-      width = 30,
+      width = 40,
       mappings = {
         ["<CR>"] = "open_with_window_picker",
         ["R"] = "rename",

@@ -99,18 +99,18 @@ return {
           },
         },
       },
-      sorting = {
-        priority_weight = 2,
-        comparators = {
-          compare.offset,
-          compare.score,
-          custom_compare.label,
-          custom_compare.kind,
-          compare.sort_text,
-          compare.recently_used,
-          compare.locality,
-        },
-      },
+      -- sorting = {
+      --   priority_weight = 2,
+      --   comparators = {
+      --     compare.offset,
+      --     compare.score,
+      --     custom_compare.label,
+      --     custom_compare.kind,
+      --     compare.sort_text,
+      --     compare.recently_used,
+      --     compare.locality,
+      --   },
+      -- },
       window = {
         completion = { border = "none" },
         documentation = {

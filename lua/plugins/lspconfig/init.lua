@@ -45,41 +45,18 @@ return {
     },
   },
   {
-    "mhartington/formatter.nvim",
-    cmd = "Format",
+    "jose-elias-alvarez/null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("formatter").setup({
-        filetype = {
-          lua = {
-            require("formatter.filetypes.lua").stylua,
-          },
-          html = {
-            require("formatter.filetypes.html").prettier,
-          },
-          css = {
-            require("formatter.filetypes.css").prettier,
-          },
-          svelte = {
-            require("formatter.filetypes.svelte").prettier,
-          },
-          json = {
-            require("formatter.filetypes.json").prettierd,
-          },
-          jsonc = {
-            require("formatter.filetypes.json").prettierd,
-          },
-          javascript = {
-            require("formatter.filetypes.javascript").prettier,
-          },
-          typescript = {
-            require("formatter.filetypes.typescript").prettier,
-          },
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.prettierd.with({ extra_filetypes = { "svelte" } }),
+          null_ls.builtins.formatting.rustfmt,
+          null_ls.builtins.formatting.stylua,
         },
       })
     end,
-    keys = {
-      { "<Leader>x", ":Format<CR>", silent = true },
-    },
   },
   {
     "onsails/diaglist.nvim",

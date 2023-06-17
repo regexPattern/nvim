@@ -12,6 +12,9 @@ return {
         skip_multiline = true,
       },
     },
+    {
+      "windwp/nvim-ts-autotag",
+    },
   },
   config = function()
     require("nvim-treesitter.configs").setup({
@@ -19,7 +22,6 @@ return {
       indent = {
         enable = true,
       },
-      context_commentstring = { enable = true },
       ensure_installed = {
         "lua",
         "rust",
@@ -27,6 +29,7 @@ return {
       },
       sync_install = false,
       auto_install = true,
+      autotag = { enable = true },
     })
   end,
 }
