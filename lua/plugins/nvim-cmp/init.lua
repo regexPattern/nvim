@@ -68,8 +68,10 @@ return {
           end
         end, { "i", "s" }),
       },
+
       sources = {
         { name = "nvim_lsp" },
+        { name = "luasnip" },
         {
           name = "path",
           option = {
@@ -84,7 +86,6 @@ return {
           },
         },
         { name = "fish" },
-        { name = "luasnip" },
         {
           name = "buffer",
           keyword_length = 3,
@@ -99,18 +100,15 @@ return {
           },
         },
       },
-      -- sorting = {
-      --   priority_weight = 2,
-      --   comparators = {
-      --     compare.offset,
-      --     compare.score,
-      --     custom_compare.label,
-      --     custom_compare.kind,
-      --     compare.sort_text,
-      --     compare.recently_used,
-      --     compare.locality,
-      --   },
-      -- },
+      sorting = {
+        comparators = {
+          compare.offset,
+          compare.exact,
+          compare.score,
+          compare.sort_text,
+          custom_compare.kind,
+        },
+      },
       window = {
         completion = { border = "none" },
         documentation = {

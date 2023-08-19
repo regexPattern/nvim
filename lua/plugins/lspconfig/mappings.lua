@@ -20,11 +20,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set("n", "<Leader>x", function()
       vim.lsp.buf.format({
-        async = true,
-        filter = function(client)
-          return client.name == "null-ls"
-        end,
         bufnr = args.buf,
+        timeout_ms = 2000
       })
     end, { buffer = args.buf })
   end,

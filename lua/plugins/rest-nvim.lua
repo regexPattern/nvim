@@ -1,4 +1,4 @@
-return {
+--[[ return {
   "rest-nvim/rest.nvim",
   ft = "http",
   dependencies = { "nvim-lua/plenary.nvim" },
@@ -7,4 +7,6 @@ return {
     result_split_in_place = false,
     jump_to_request = true,
   },
-}
+} ]]
+
+return {}

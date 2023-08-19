@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspAttach_inlayhints", { clear = true }),
+  group = vim.api.nvim_create_augroup("LspAttach_prefer_null_ls_formatting", { clear = true }),
   callback = function(args)
     if not (args.data and args.data.client_id) then
       return
@@ -47,9 +47,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    local lsp_inlayhints_ok, lsp_inlayhints = pcall(require, "lsp-inlayhints")
-    if lsp_inlayhints_ok and client.server_capabilities.inlayHintProvider then
-      lsp_inlayhints.on_attach(client, args.buf)
+    if client.name == "tsserver" then
+      client.server_capabilities.documentFormattingProvider = false
     end
   end,
 })

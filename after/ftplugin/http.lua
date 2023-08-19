@@ -1,5 +1,5 @@
-vim.keymap.set("n", "<Enter>", function()
+--[[ vim.keymap.set("n", "<Enter>", function()
   pcall(function()
     require("rest-nvim").run()
   end)
-end, { buffer = true })
+end, { buffer = true }) ]]
