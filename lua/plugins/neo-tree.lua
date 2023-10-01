@@ -1,14 +1,11 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  branch = "v2.x",
-  cmd = "Neotree",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
     {
       "s1n7ax/nvim-window-picker",
-      version = "v1.*",
       config = true,
     },
   },
@@ -32,8 +29,17 @@ return {
         ["<CR>"] = "open_with_window_picker",
         ["R"] = "rename",
         ["D"] = "delete",
-        ["%"] = "add",
-        ["d"] = "add_directory",
+        ["%"] = {
+          "add",
+          config = { show_path = "relative" },
+        },
+        ["d"] = {
+          "add_directory",
+          config = { show_path = "relative" },
+        },
+        ["c"] = "copy_to_clipboard",
+        ["m"] = "cut_to_clipboard",
+        ["p"] = "paste_from_clipboard",
         ["<C-v>"] = "vsplit_with_window_picker",
         ["<C-x>"] = "split_with_window_picker",
       },
@@ -44,12 +50,12 @@ return {
         hide_dotfiles = false,
         hide_gitignored = false,
       },
-      follow_current_file = true,
+      follow_current_file = { enabled = true },
       hijack_netrw_behavior = "disabled",
     },
     default_component_configs = {
       git_status = {
-        -- taken from the vscode official git plugin:
+        -- Taken from the vscode official git plugin:
         -- https://github.com/microsoft/vscode/blob/570a2d8573a39b533bc1e960e295d52b04a1219c/extensions/git/src/repository.ts#L184
         symbols = {
           added = "A",
@@ -69,6 +75,10 @@ return {
     vim.g.neo_tree_remove_legacy_commands = 1
   end,
   keys = {
-    { "<Leader>E", ":Neotree toggle<CR>", silent = true },
+    {
+      "<Leader>E",
+      ":Neotree toggle<CR>",
+      silent = true,
+    },
   },
 }

@@ -21,34 +21,3 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
   border = "single",
   max_width = 40,
 })
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspAttach_inlayhints", { clear = true }),
-  callback = function(args)
-    if not (args.data and args.data.client_id) then
-      return
-    end
-
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-    local lsp_inlayhints_ok, lsp_inlayhints = pcall(require, "lsp-inlayhints")
-    if lsp_inlayhints_ok and client.server_capabilities.inlayHintProvider then
-      lsp_inlayhints.on_attach(client, args.buf)
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspAttach_prefer_null_ls_formatting", { clear = true }),
-  callback = function(args)
-    if not (args.data and args.data.client_id) then
-      return
-    end
-
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-    if client.name == "tsserver" then
-      client.server_capabilities.documentFormattingProvider = false
-    end
-  end,
-})

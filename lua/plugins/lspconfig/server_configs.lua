@@ -7,6 +7,7 @@ return {
     settings = {
       Lua = {
         completion = { callSnippet = "Replace" },
+        hint = { enable = true },
         runtime = {
           version = "LuaJIT",
           path = runtime_path,
