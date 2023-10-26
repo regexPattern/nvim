@@ -6,6 +6,7 @@ return {
     local fzf = require("fzf-lua")
 
     fzf.setup({
+      -- "max-perf",
       keymap = {
         fzf = {
           ["ctrl-q"] = "select-all+accept",
@@ -18,6 +19,7 @@ return {
       },
       -- move the prompt to the bottom.
       fzf_opts = { ["--layout"] = false },
+      file_icon_padding = " ",
     })
 
     fzf.register_ui_select()

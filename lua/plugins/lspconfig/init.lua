@@ -41,7 +41,7 @@ return {
               vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
 
               if client.server_capabilities.inlayHintProvider then
-                vim.lsp.inlay_hint(bufnr, true)
+                -- vim.lsp.inlay_hint(bufnr, true)
               end
             end,
           }))
@@ -79,7 +79,11 @@ return {
       end, { range = true })
     end,
     config = function()
-      local formatters = {}
+      local formatters = {
+        c = { "clang_format" },
+        go = { "gofmt" },
+        python = { "isort", "black" }
+      }
 
       -- Use `prettierd` for most web development related filetypes
       for _, filetype in pairs(require("core.utils").web_dev_filetypes) do
