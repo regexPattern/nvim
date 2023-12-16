@@ -1,48 +1,44 @@
 return {
   "ibhagwan/fzf-lua",
   cmd = "FzfLua",
-  dependencies = { { "nvim-tree/nvim-web-devicons", config = true } },
-  config = function()
-    local fzf = require("fzf-lua")
-
-    fzf.setup({
-      -- "max-perf",
-      keymap = {
-        fzf = {
-          ["ctrl-q"] = "select-all+accept",
-        },
+  opts = {
+    keymap = {
+      fzf = {
+        ["ctrl-q"] = "select-all+accept",
       },
-      winopts = {
-        fullscreen = true,
-        border = "none",
-        preview = { hidden = "hidden" },
-      },
-      -- move the prompt to the bottom.
-      fzf_opts = { ["--layout"] = false },
-      file_icon_padding = " ",
-    })
-
+    },
+    winopts = {
+      fullscreen = true,
+      border = "none",
+      preview = { hidden = "hidden" },
+    },
+    fzf_opts = {
+      ["--layout"] = false,
+    },
+    file_icon_padding = "",
+  },
+  config = function(spec)
+    local fzf = require "fzf-lua"
+    fzf.setup(spec.opts)
     fzf.register_ui_select()
   end,
   keys = {
-    { "<Leader>ff", ":FzfLua files<CR>", silent = true },
-    { "<Leader>fb", ":FzfLua buffers<CR>", silent = true },
-    { "<Leader>fg", ":FzfLua live_grep<CR>", silent = true },
-    { "<Leader>fw", ":FzfLua grep_cword<CR>", silent = true },
-    { "z=", ":FzfLua spell_suggest<CR>", silent = true },
+    { "<Leader>ff", ":FzfLua files<CR>" },
+    { "<Leader>fb", ":FzfLua buffers<CR>" },
+    { "<Leader>fg", ":FzfLua live_grep<CR>" },
+    { "<Leader>fw", ":FzfLua grep_cword<CR>" },
+    { "z=",         ":FzfLua spell_suggest<CR>" },
     {
       "<Leader>nv",
-      ":FzfLua files cwd=" .. vim.fn.stdpath("config") .. "<CR>",
-      silent = true,
+      ":FzfLua files cwd=" .. vim.fn.stdpath "config" .. "<CR>",
     },
-    { "<Leader>df", ":FzfLua files cwd=~/.dotfiles<CR>", silent = true },
+    { "<Leader>df", ":FzfLua files cwd=~/.dotfiles<CR>" },
     {
       "<Leader>fe",
       function()
-        local searched_ext = vim.fn.input("Extension: ")
-        require("fzf-lua").files({ cmd = "fd -e " .. searched_ext })
+        local searched_ext = vim.fn.input "Extension: "
+        require("fzf-lua").files { cmd = "fd -e " .. searched_ext }
       end,
-      silent = true,
     },
   },
 }

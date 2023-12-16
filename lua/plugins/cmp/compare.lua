@@ -1,7 +1,6 @@
-local M = {}
+local defualt_weights = require("cmp.types.lsp").CompletionItemKind
 
-local default_weights = require("cmp.types.lsp").CompletionItemKind
-local custom_weights = vim.tbl_add_reverse_lookup({
+local custom_weights = vim.tbl_add_reverse_lookup {
   Method = 1,
   Function = 2,
   Constructor = 3,
@@ -30,11 +29,13 @@ local custom_weights = vim.tbl_add_reverse_lookup({
   User = 26,
   Issue = 27,
   Snippet = 28,
-})
+}
+
+local M = {}
 
 function M.kind(entry1, entry2)
-  local kind1 = custom_weights[default_weights[entry1:get_kind()]] or 100
-  local kind2 = custom_weights[default_weights[entry2:get_kind()]] or 100
+  local kind1 = custom_weights[defualt_weights[entry1:get_kind()]] or 100
+  local kind2 = custom_weights[defualt_weights[entry2:get_kind()]] or 100
   if kind1 ~= kind2 then
     local diff = kind1 - kind2
     if diff < 0 then

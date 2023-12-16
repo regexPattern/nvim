@@ -1,6 +1,9 @@
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+local function getluaruntimepath()
+  local runtimepath = vim.split(package.path, ";")
+  table.insert(runtimepath, "lua/?.lua")
+  table.insert(runtimepath, "lua/?/init.lua")
+  return runtimepath
+end
 
 return {
   lua_ls = {
@@ -10,14 +13,14 @@ return {
         hint = { enable = true },
         runtime = {
           version = "LuaJIT",
-          path = runtime_path,
+          path = getluaruntimepath(),
         },
         diagnostics = { globals = { "vim" } },
         workspace = {
           checkThirdParty = false,
           library = {
-            vim.fn.expand("$VIMRUNTIME/lua"),
-            vim.fn.stdpath("config") .. "/lua",
+            vim.fn.expand "$VIMRUNTIME/lua",
+            vim.fn.stdpath "config" .. "/lua",
           },
         },
         telemetry = { enable = false },

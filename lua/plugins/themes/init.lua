@@ -1,12 +1,6 @@
---[[ return vim.tbl_extend("force", require("plugins.themes.nord"), {
+local theme = require "plugins.themes.github"
+
+return vim.tbl_extend("force", theme, {
   lazy = false,
   priority = 1000,
-}) ]]
-
-vim.opt.cursorline = true
-vim.cmd.hi("NormalFloat guibg=NONE")
-vim.cmd.hi("CursorLine guibg=NONE")
-vim.cmd.hi("CursorLineNr guifg=yellow")
-vim.cmd.hi("LineNr guifg=gray")
-
-return {}
+})

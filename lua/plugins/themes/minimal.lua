@@ -1,9 +1,10 @@
 return {
   "yazeed1s/minimal.nvim",
-  config = function()
+  init = function()
     vim.g.minimal_italic_comments = false
     vim.g.minimal_transparent_background = true
-
-    vim.cmd([[ colorscheme minimal-base16 ]])
+  end,
+  config = function()
+    vim.cmd.colorscheme "minimal-base16"
   end,
 }

@@ -1,32 +1,25 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  version = false,
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
-  dependencies = {
-    {
-      "Darazaki/indent-o-matic",
-      config = {
-        max_lines = 128,
-        standard_widths = { 2, 4, 8 },
-        skip_multiline = true,
-      },
-    },
+  opts = {
+    sync_install = false,
+    auto_install = true,
+    highlight = { enable = true },
+    indent = { enable = true },
   },
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      highlight = { enable = true },
-      indent = { enable = true },
-      auto_install = true,
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "gnn",
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
-        },
+  config = function(spec)
+    require("nvim-treesitter.configs").setup(spec.opts)
+
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_config.jinja = {
+      install_info = {
+        url = "https://github.com/dbt-labs/tree-sitter-jinja2",
+        files = { "src/parser.c" },
+        branch = "main",
       },
-    })
+    }
+
+    vim.treesitter.language.register("jinja", "html")
   end,
 }
