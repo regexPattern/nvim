@@ -1,4 +1,4 @@
-return {
+--[[ {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
@@ -22,7 +22,7 @@ return {
 
     cmp.setup {
       mapping = {
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<Tab>"] = function(fallback)
           if cmp.visible() then
             cmp.confirm(select_opts)
           elseif vim.snippet.jumpable(1) then
@@ -30,28 +30,28 @@ return {
           else
             fallback()
           end
-        end),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        end,
+        ["<S-Tab>"] = function(fallback)
           if vim.snippet.jumpable(-1) then
             vim.snippet.jump(-1)
           else
             fallback()
           end
-        end),
-        ["<C-p>"] = cmp.mapping(function()
+        end,
+        ["<C-p>"] = function()
           if cmp.visible() then
             cmp.select_prev_item(select_opts)
           else
             cmp.complete()
           end
-        end),
-        ["<C-n>"] = cmp.mapping(function()
+        end,
+        ["<C-n>"] = function()
           if cmp.visible() then
             cmp.select_next_item(select_opts)
           else
             cmp.complete()
           end
-        end),
+        end,
       },
       sources = {
         { name = "nvim_lsp" },
@@ -86,13 +86,13 @@ return {
         },
       },
       sorting = {
-        --[[ comparators = {
+        comparators = {
           defaultcomparators.offset,
           defaultcomparators.exact,
           defaultcomparators.score,
           defaultcomparators.sort_text,
           customcomparators.kind,
-        }, ]]
+        },
       },
       window = {
         completion = { border = "none" },
@@ -113,4 +113,6 @@ return {
       },
     }
   end,
-}
+} ]]
+
+return {}

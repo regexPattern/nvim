@@ -3,15 +3,12 @@ return {
     "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
       {
         "neovim/nvim-lspconfig",
         init = function()
           require "plugins.lspconfig.setup"
         end,
-        dependencies = {
-          "b0o/schemastore.nvim",
-        },
+        dependencies = { "b0o/schemastore.nvim" },
       },
       {
         "williamboman/mason.nvim",
@@ -21,11 +18,9 @@ return {
     },
     opts = {
       handlers = {
-        function(server_name)
-          local server_config = require("plugins.lspconfig.server-configs")[server_name] or {}
-          require("lspconfig")[server_name].setup(vim.tbl_deep_extend("force", server_config, {
-            capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          }))
+        function(server)
+          local config = require("plugins.lspconfig.server-configs")[server] or {}
+          require("lspconfig")[server].setup(vim.tbl_deep_extend("force", config, {}))
         end,
       },
     },
@@ -35,12 +30,8 @@ return {
     event = "LspAttach",
     opts = {
       notification = {
-        view = {
-          stack_upwards = false,
-        },
-        window = {
-          winblend = 0,
-        },
+        view = { stack_upwards = false },
+        window = { winblend = 0 },
       },
     },
   },

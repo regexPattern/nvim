@@ -15,11 +15,6 @@ return {
   },
   config = function(spec)
     require("github-theme").setup(spec.opts)
-    vim.defer_fn(function()
-      -- stylua: ignore
-      vim.cmd.colorscheme(vim.o.background == "dark"
-        and "github_dark_high_contrast"
-        or "github_light_high_contrast")
-    end, 0)
+    vim.cmd.colorscheme "github_light_high_contrast"
   end,
 }

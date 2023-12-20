@@ -5,6 +5,7 @@ require "magic"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
+---@diagnostic disable-next-line
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     "git",
@@ -20,9 +21,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "nord" } },
-  change_detection = {
-    enabled = true,
-    notify = false,
-  },
+  install = { colorscheme = { "default" } },
+  change_detection = { enabled = false },
 })

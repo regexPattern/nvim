@@ -14,17 +14,11 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.wrap = false
 
--- Completion
-vim.opt.pumheight = 15
-vim.opt.completeopt = "menuone,preview"
-
 -- Scrolling
 vim.opt.cursorline = true
 vim.opt.scrolloff = 5
 
 -- Search
-vim.opt.grepprg = "rg --vimgrep --smart-case --hidden"
-vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 
