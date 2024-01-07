@@ -23,19 +23,3 @@ vim.keymap.set("n", "<C-p>", function()
     end
   end
 end)
-
-vim.keymap.set({ "i", "s" }, "<C-j>", function()
-  if vim.snippet.jumpable(1) then
-    return "<cmd>lua vim.snippet.jump(1)<CR>"
-  else
-    return "<Tab>"
-  end
-end, { expr = true })
-
-vim.keymap.set({ "i", "s" }, "<C-k>", function()
-  if vim.snippet.jumpable(-1) then
-    return "<cmd>lua vim.snippet.jump(-1)<CR>"
-  else
-    return "<S-Tab>"
-  end
-end, { expr = true })

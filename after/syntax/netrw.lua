@@ -1,1 +1,1 @@
-vim.cmd [[ syn match NetrwSpecialFiles /Cargo.toml\|README.md/ ]]
+vim.cmd [[ syntax match NetrwSpecialFiles /Cargo.toml\|README.md/ ]]

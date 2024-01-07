@@ -10,32 +10,36 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
+    local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local opts = { buffer = true }
-
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<Leader>x", vim.lsp.buf.format, opts)
-
-    if client ~= nil and client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(0, false)
-      vim.keymap.set("n", "<Leader>t", function()
-        vim.lsp.inlay_hint.enable(0, nil)
-      end, opts)
+    if client == nil then
+      return
     end
 
-    vim.cmd [[ nnoremenu PopUp.Format :lua vim.lsp.buf.format()<CR> ]]
+    local function map(mode, key, cb, extra_opts)
+      local opts = vim.tbl_deep_extend("keep", extra_opts or {}, { buffer = bufnr })
+      vim.keymap.set(mode, key, cb, opts)
+    end
+
+    map("n", "K", vim.lsp.buf.hover)
+    map("n", "gd", vim.lsp.buf.definition)
+    map("n", "gD", vim.lsp.buf.declaration)
+    map("n", "gr", vim.lsp.buf.references)
+    map("n", "gs", vim.lsp.buf.signature_help)
+    map("n", "go", vim.lsp.buf.type_definition)
+    map("n", "<Leader>rn", vim.lsp.buf.rename)
+    map("n", "<Leader>ca", vim.lsp.buf.code_action)
+    map("n", "<Leader>x", vim.lsp.buf.format)
+
+    if client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(bufnr, false)
+      map("n", "<Leader>t", function()
+        vim.lsp.inlay_hint.enable(bufnr, nil)
+      end)
+    end
+
+    if client.server_capabilities.completionProvider then
+      vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+    end
   end,
 })
-
---[[ vim.api.nvim_create_autocmd("DiagnosticChanged", {
-  callback = function(
-    vim.diagnostic.setqflist()
-  end,
-}) ]]

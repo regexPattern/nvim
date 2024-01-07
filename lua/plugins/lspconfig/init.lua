@@ -3,6 +3,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
       {
         "neovim/nvim-lspconfig",
         init = function()
@@ -20,7 +21,9 @@ return {
       handlers = {
         function(server)
           local config = require("plugins.lspconfig.server-configs")[server] or {}
-          require("lspconfig")[server].setup(vim.tbl_deep_extend("force", config, {}))
+          require("lspconfig")[server].setup(vim.tbl_deep_extend("force", config, {
+            capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          }))
         end,
       },
     },

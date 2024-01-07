@@ -1,4 +1,4 @@
---[[ {
+return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
@@ -12,88 +12,82 @@
   },
   config = function()
     local cmp = require "cmp"
-    -- local defaultcomparators = require "cmp.config.compare"
-    -- local customcomparators = require "plugins.cmp.compare"
 
-    local select_opts = {
+    local opts = {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }
 
+    local sources = {
+      { name = "nvim_lsp" },
+      {
+        name = "path",
+        option = {
+          -- Resolve relative paths as relative Neovim's cwd.
+          get_cwd = function(params)
+            local ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
+            if vim.tbl_contains({ "fish", "rust" }, ft) then
+              return vim.fn.getcwd()
+            end
+            return vim.fn.expand(("#%d:p:h"):format(params.context.bufnr))
+          end,
+        },
+      },
+      {
+        name = "buffer",
+        keyword_length = 3,
+        option = {
+          -- Only include visible buffers (buffers that are loaded into a window).
+          get_bufnrs = function()
+            local buffers = {}
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+              buffers[vim.api.nvim_win_get_buf(win)] = true
+            end
+            return vim.tbl_keys(buffers)
+          end,
+        },
+      },
+    }
+
     cmp.setup {
       mapping = {
-        ["<Tab>"] = function(fallback)
+        ["<C-y>"] = function(fb)
           if cmp.visible() then
-            cmp.confirm(select_opts)
-          elseif vim.snippet.jumpable(1) then
-            vim.snippet.jump(1)
+            cmp.confirm(opts)
           else
-            fallback()
+            fb()
           end
         end,
-        ["<S-Tab>"] = function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fb)
+          if vim.snippet.jumpable(1) then
+            vim.snippet.jump(1)
+          else
+            fb()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fb)
           if vim.snippet.jumpable(-1) then
             vim.snippet.jump(-1)
           else
-            fallback()
+            fb()
           end
-        end,
+        end, { "i", "s" }),
         ["<C-p>"] = function()
           if cmp.visible() then
-            cmp.select_prev_item(select_opts)
+            cmp.select_prev_item(opts)
           else
             cmp.complete()
           end
         end,
         ["<C-n>"] = function()
           if cmp.visible() then
-            cmp.select_next_item(select_opts)
+            cmp.select_next_item(opts)
           else
             cmp.complete()
           end
         end,
       },
-      sources = {
-        { name = "nvim_lsp" },
-        {
-          name = "path",
-          option = {
-            -- Resolve relative paths as relative Neovim's cwd.
-            get_cwd = function(params)
-              local filetype = vim.api.nvim_get_option_value("filetype", { scope = "local" })
-              if vim.tbl_contains({ "fish", "rust" }, filetype) then
-                return vim.fn.getcwd()
-              end
-              return vim.fn.expand(("#%d:p:h"):format(params.context.bufnr))
-            end,
-          },
-        },
-        { name = "fish" },
-        {
-          name = "buffer",
-          keyword_length = 3,
-          option = {
-            -- Only include visible buffers (buffers that are loaded into a
-            -- window).
-            get_bufnrs = function()
-              local buffers = {}
-              for _, win in ipairs(vim.api.nvim_list_wins()) do
-                buffers[vim.api.nvim_win_get_buf(win)] = true
-              end
-              return vim.tbl_keys(buffers)
-            end,
-          },
-        },
-      },
-      sorting = {
-        comparators = {
-          defaultcomparators.offset,
-          defaultcomparators.exact,
-          defaultcomparators.score,
-          defaultcomparators.sort_text,
-          customcomparators.kind,
-        },
-      },
+      sources = sources,
       window = {
         completion = { border = "none" },
         documentation = {
@@ -112,7 +106,9 @@
         fields = { "kind", "abbr", "menu" },
       },
     }
-  end,
-} ]]
 
-return {}
+    cmp.setup.filetype("fish", {
+      sources = vim.tbl_extend("force", sources, { { name = "fish" } }),
+    })
+  end,
+}

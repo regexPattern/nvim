@@ -11,6 +11,5 @@ return {
   end,
   config = function()
     vim.cmd.colorscheme "gruvbox-material"
-    vim.cmd.highlight "CmpItemAbbrDeprecated gui=strikethrough"
   end,
 }

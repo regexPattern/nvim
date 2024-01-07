@@ -6,5 +6,6 @@ return {
   end,
   config = function()
     vim.cmd.colorscheme "minimal-base16"
+    vim.cmd.highlight "PmenuSel gui=reverse"
   end,
 }
