@@ -1,4 +1,4 @@
-return {} --[[ {
+return {
   "nvim-tree/nvim-tree.lua",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
@@ -39,4 +39,4 @@ return {} --[[ {
   keys = {
     { "<Leader>E", ":NvimTreeToggle<CR>", silent = true },
   },
-} ]]
+}

@@ -19,9 +19,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "*.md" },
   callback = function()
-    vim.wo.spell = true
-    vim.wo.wrap = true
-
     vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { buffer = true, expr = true, silent = true })
     vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { buffer = true, expr = true, silent = true })
   end,

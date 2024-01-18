@@ -1,5 +1,3 @@
--- Neovim core settings, independent from any plugin.
-
 -- Indentation
 vim.opt.expandtab = false
 vim.opt.formatoptions = "jcrql"
@@ -21,6 +19,7 @@ vim.opt.scrolloff = 5
 -- Search
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- General
 vim.opt.swapfile = false

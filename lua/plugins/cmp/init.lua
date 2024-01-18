@@ -1,4 +1,6 @@
-return {
+return {}
+
+--[[ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
@@ -10,6 +12,9 @@ return {
       ft = "fish",
     },
   },
+  init = function()
+    vim.opt.pumheight = 15
+  end,
   config = function()
     local cmp = require "cmp"
 
@@ -51,21 +56,21 @@ return {
 
     cmp.setup {
       mapping = {
-        ["<C-y>"] = function(fb)
+        ["<Tab>"] = function(fb)
           if cmp.visible() then
             cmp.confirm(opts)
           else
             fb()
           end
         end,
-        ["<Tab>"] = cmp.mapping(function(fb)
+        ["<C-j>"] = cmp.mapping(function(fb)
           if vim.snippet.jumpable(1) then
             vim.snippet.jump(1)
           else
             fb()
           end
         end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fb)
+        ["<C-k>"] = cmp.mapping(function(fb)
           if vim.snippet.jumpable(-1) then
             vim.snippet.jump(-1)
           else
@@ -111,4 +116,4 @@ return {
       sources = vim.tbl_extend("force", sources, { { name = "fish" } }),
     })
   end,
-}
+} ]]

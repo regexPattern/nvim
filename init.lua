@@ -1,3 +1,5 @@
+-- Core Neovim settings
+--
 require "settings"
 require "mappings"
 require "diagnostics"

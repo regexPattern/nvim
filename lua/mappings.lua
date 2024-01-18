@@ -1,5 +1,3 @@
--- Keymaps, independent from any plugin.
-
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<Leader>e", vim.cmd.Explore)
