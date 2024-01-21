@@ -1,9 +1,6 @@
--- Core Neovim settings
---
 require "settings"
 require "mappings"
-require "diagnostics"
-require "magic"
+require "autocommands"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -23,6 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "default" } },
-  change_detection = { enabled = false },
+  change_detection = {
+    enabled = false,
+  },
 })

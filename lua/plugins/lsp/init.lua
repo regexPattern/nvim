@@ -1,29 +1,28 @@
+local mason_spec = {
+  "williamboman/mason.nvim",
+  build = ":MasonUpdate",
+  config = true,
+}
+
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
+    "https://github.com/williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
       {
         "neovim/nvim-lspconfig",
         init = function()
-          require "plugins.lspconfig.setup"
+          require "plugins.lsp.on-attach"
         end,
         dependencies = { "b0o/schemastore.nvim" },
       },
-      {
-        "williamboman/mason.nvim",
-        build = ":MasonUpdate",
-        config = true,
-      },
+      mason_spec,
     },
     opts = {
       handlers = {
         function(server)
-          local config = require("plugins.lspconfig.server-configs")[server] or {}
-          require("lspconfig")[server].setup(vim.tbl_deep_extend("force", config, {
-            capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          }))
+          local config = require("plugins.lsp.server-configs")[server] or {}
+          require("lspconfig")[server].setup(config)
         end,
       },
     },
@@ -43,11 +42,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      {
-        "williamboman/mason.nvim",
-        build = ":MasonUpdate",
-        config = true,
-      },
+      mason_spec,
       {
         "jay-babu/mason-null-ls.nvim",
         main = "mason-null-ls",

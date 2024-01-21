@@ -1,14 +1,6 @@
 return {
-  "echasnovski/mini.surround",
+  "https://github.com/echasnovski/mini.surround",
+  event = { "BufReadPost", "BufNewFile" },
   main = "mini.surround",
   config = true,
-  keys = {
-    { "sa", mode = "v" },
-    "sF",
-    "sd",
-    "sf",
-    "sh",
-    "sn",
-    "sr",
-  },
 }

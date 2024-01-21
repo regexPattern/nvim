@@ -1,5 +1,5 @@
 return {
-  "navarasu/onedark.nvim",
+  "https://github.com/navarasu/onedark.nvim",
   opts = {
     style = "dark",
     transparent = false,

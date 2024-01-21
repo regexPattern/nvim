@@ -1,42 +1,42 @@
-return {
-  "nvim-tree/nvim-tree.lua",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-  opts = {
-    update_focused_file = {
-      enable = false,
-    },
-    on_attach = function(bufnr)
-      local api = require "nvim-tree.api"
-      local opts = { buffer = bufnr, silent = true }
+return {}
 
-      vim.keymap.set("n", "R", api.fs.rename, opts)
-      vim.keymap.set("n", "<CR>", api.node.open.edit, opts)
-      vim.keymap.set("n", "%", api.fs.create, opts)
-      vim.keymap.set("n", "D", api.fs.remove, opts)
-      vim.keymap.set("n", "H", api.tree.collapse_all, opts)
-    end,
-  },
-  init = function()
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "NvimTree" },
-      callback = function(args)
-        local nvim_tree_api = require "nvim-tree.api"
-
-        vim.api.nvim_buf_create_user_command(args.buf, "CopyAbsolutePath", function()
-          local node = nvim_tree_api.tree.get_node_under_cursor()
-          nvim_tree_api.fs.copy.absolute_path(node)
-        end, {})
-
-        vim.api.nvim_buf_create_user_command(args.buf, "CopyRelativePath", function()
-          local node = nvim_tree_api.tree.get_node_under_cursor()
-          nvim_tree_api.fs.copy.relative_path(node)
-        end, {})
-      end,
-    })
-  end,
-  keys = {
-    { "<Leader>E", ":NvimTreeToggle<CR>", silent = true },
-  },
-}
+-- return {
+--   "https://github.com/nvim-tree/nvim-tree.lua",
+--   dependencies = { "nvim-tree/nvim-web-devicons" },
+--   opts = {
+--     update_focused_file = {
+--       enable = true,
+--     },
+--     on_attach = function(bufnr)
+--       local api = require "nvim-tree.api"
+--       local opts = { buffer = bufnr }
+-- 
+--       vim.keymap.set("n", "<CR>", api.node.open.edit, opts)
+--       vim.keymap.set("n", "<C-v>", api.node.open.vertical, opts)
+--       vim.keymap.set("n", "<C-x>", api.node.open.horizontal, opts)
+-- 
+--       vim.keymap.set("n", "R", api.fs.rename, opts)
+--       vim.keymap.set("n", "%", api.fs.create, opts)
+--       vim.keymap.set("n", "D", api.fs.remove, opts)
+--       vim.keymap.set("n", "H", api.tree.collapse_all, opts)
+--     end,
+--   },
+--   init = function()
+--     -- https://gitlab.com/gabmus/nvpunk/-/blob/master/lua/nvpunk/internals/context_menu.lua
+--     vim.api.nvim_create_autocmd("BufEnter", {
+--       callback = function()
+--         vim.cmd [[ aunmenu PopUp ]]
+-- 
+--         if vim.bo.filetype ~= "NvimTree" then
+--           return
+--         end
+-- 
+--         vim.cmd [[ nmenu PopUp.Copy\ Relative\ Path <CMD>lua require("nvim-tree.api").fs.copy.relative_path()<CR> ]]
+--         vim.cmd [[ nmenu PopUp.Copy\ Absolute\ Path <CMD>lua require("nvim-tree.api").fs.copy.absolute_path()<CR> ]]
+--       end,
+--     })
+--   end,
+--   keys = {
+--     { "<Leader>E", ":NvimTreeToggle<CR>" },
+--   },
+-- }

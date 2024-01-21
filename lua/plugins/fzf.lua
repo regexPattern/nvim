@@ -1,5 +1,5 @@
 return {
-  "ibhagwan/fzf-lua",
+  "https://github.com/ibhagwan/fzf-lua",
   cmd = "FzfLua",
   opts = {
     keymap = {
@@ -10,7 +10,9 @@ return {
     winopts = {
       fullscreen = true,
       border = "none",
-      preview = { hidden = "hidden" },
+      preview = {
+        hidden = "hidden",
+      },
     },
     fzf_opts = {
       ["--layout"] = false,
@@ -24,15 +26,12 @@ return {
   end,
   keys = {
     { "<Leader>ff", ":FzfLua files<CR>" },
-    { "<Leader>fb", ":FzfLua buffers<CR>" },
     { "<Leader>fg", ":FzfLua live_grep<CR>" },
-    { "<Leader>fw", ":FzfLua grep_cword<CR>" },
-    { "z=",         ":FzfLua spell_suggest<CR>" },
+    { "z=", ":FzfLua spell_suggest<CR>" },
     {
       "<Leader>nv",
       ":FzfLua files cwd=" .. vim.fn.stdpath "config" .. "<CR>",
     },
-    { "<Leader>df", ":FzfLua files cwd=~/.dotfiles<CR>" },
     {
       "<Leader>fe",
       function()

@@ -1,9 +1,6 @@
 return {
-  "echasnovski/mini.align",
+  "https://github.com/echasnovski/mini.align",
+  event = { "BufReadPost", "BufNewFile" },
   main = "mini.align",
   config = true,
-  keys = {
-    { "ga", mode = "v" },
-    { "gA", mode = "v" },
-  },
 }
