@@ -1,6 +1,8 @@
 return {
-  "NvChad/nvim-colorizer.lua",
+  "https://github.com/NvChad/nvim-colorizer.lua",
   opts = {
-    tailwind = "lsp",
+    user_default_options = {
+      tailwind = "lsp",
+    },
   },
 }

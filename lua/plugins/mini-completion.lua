@@ -3,6 +3,9 @@ return {
   event = "InsertEnter",
   main = "mini.completion",
   init = function()
+    vim.opt.shortmess = "FCtoclTO"
+    vim.opt.completeopt = "menuone,noinsert"
+
     vim.keymap.set("i", "<Tab>", function()
       if vim.fn.pumvisible() ~= 0 then
         return "<C-y>"
@@ -16,5 +19,6 @@ return {
       source_func = "omnifunc",
       auto_setup = false,
     },
+    set_vim_settings = false,
   },
 }

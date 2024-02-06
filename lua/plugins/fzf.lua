@@ -17,7 +17,7 @@ return {
     fzf_opts = {
       ["--layout"] = false,
     },
-    file_icon_padding = "",
+    -- file_icon_padding = " ",
   },
   config = function(spec)
     local fzf = require "fzf-lua"
@@ -25,8 +25,8 @@ return {
     fzf.register_ui_select()
   end,
   keys = {
-    { "<Leader>ff", ":FzfLua files<CR>" },
-    { "<Leader>fg", ":FzfLua live_grep<CR>" },
+    { "<D-p>", ":FzfLua files<CR>" },
+    { "<D-h>", ":FzfLua live_grep<CR>" },
     { "z=", ":FzfLua spell_suggest<CR>" },
     {
       "<Leader>nv",

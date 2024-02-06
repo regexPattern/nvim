@@ -16,7 +16,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
   max_width = 40,
 })
 
-local colorscheme = require "plugins.ui.colors.github"
+local colorscheme = require "plugins.colors.ayu"
 
 return vim.tbl_extend("force", colorscheme, {
   lazy = false,

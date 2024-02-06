@@ -25,3 +25,9 @@ vim.opt.smartcase = true
 vim.opt.swapfile = false
 vim.opt.termguicolors = true
 vim.opt.undofile = true
+
+-- Enable undercurl support in Wezterm
+vim.cmd [[
+  let &t_Cs = "\e[4:3m"
+  let &t_Ce = "\e[4:0m"
+]]

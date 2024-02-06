@@ -24,18 +24,18 @@ return {
 
     vim.cmd [[ colorscheme github_light_high_contrast ]]
 
-    local diagnostic_groups = {
-      "DiagnosticUnderlineError",
-      "DiagnosticUnderlineWarn",
-      "DiagnosticUnderlineInfo",
-      "DiagnosticUnderlineHint",
-      "DiagnosticUnderlineOk",
-    }
+    -- local diagnostic_groups = {
+    --   "DiagnosticUnderlineError",
+    --   "DiagnosticUnderlineWarn",
+    --   "DiagnosticUnderlineInfo",
+    --   "DiagnosticUnderlineHint",
+    --   "DiagnosticUnderlineOk",
+    -- }
 
-    for _, group in ipairs(diagnostic_groups) do
-      vim.cmd("highlight " .. group .. " gui=undercurl")
-    end
+    -- for _, group in ipairs(diagnostic_groups) do
+    --   vim.cmd("highlight " .. group .. " gui=undercurl")
+    -- end
 
-    vim.cmd [[ highlight NetrwSpecialFiles gui=bold,underline ]]
+    -- vim.cmd [[ highlight NetrwSpecialFiles gui=bold,underline ]]
   end,
 }
