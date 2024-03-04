@@ -1,33 +1,19 @@
--- Indentation
-vim.opt.expandtab = false
-vim.opt.formatoptions = "jcrql"
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.g.editorconfig = true
 
--- User Interface
-vim.opt.cmdheight = 0
+vim.opt.expandtab = true
+
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.wrap = false
-
--- Scrolling
-vim.opt.cursorline = true
 vim.opt.scrolloff = 5
 
--- Search
-vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- General
-vim.opt.swapfile = false
-vim.opt.termguicolors = true
-vim.opt.undofile = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
--- Enable undercurl support in Wezterm
-vim.cmd [[
-  let &t_Cs = "\e[4:3m"
-  let &t_Ce = "\e[4:0m"
-]]
+vim.opt.cmdheight = 0
+vim.opt.wrap = false
+vim.opt.termguicolors = true
+vim.opt.swapfile = false
+vim.opt.undofile = true

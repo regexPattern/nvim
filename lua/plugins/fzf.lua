@@ -1,33 +1,26 @@
 return {
-  "https://github.com/ibhagwan/fzf-lua",
-  cmd = "FzfLua",
-  opts = {
-    keymap = {
-      fzf = {
-        ["ctrl-q"] = "select-all+accept",
+  "ibhagwan/fzf-lua",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("fzf-lua").setup({
+      keymap = {
+        fzf = { ["ctrl-q"] = "select-all+accept" },
       },
-    },
-    winopts = {
-      fullscreen = true,
-      border = "none",
-      preview = {
-        hidden = "hidden",
+      winopts = {
+        fullscreen = true,
+        border = "none",
+        preview = { hidden = "hidden" },
       },
-    },
-    fzf_opts = {
-      ["--layout"] = false,
-    },
-    -- file_icon_padding = " ",
-  },
-  config = function(spec)
-    local fzf = require "fzf-lua"
-    fzf.setup(spec.opts)
-    fzf.register_ui_select()
+      fzf_opts = { ["--layout"] = false },
+      file_icon_padding = " ",
+    })
+
+    require("fzf-lua").register_ui_select()
   end,
   keys = {
-    { "<D-p>", ":FzfLua files<CR>" },
-    { "<D-h>", ":FzfLua live_grep<CR>" },
-    { "z=", ":FzfLua spell_suggest<CR>" },
+    { "<Leader>ff", ":FzfLua files<CR>" },
+    { "<Leader>fg", ":FzfLua live_grep<CR>" },
+    { "z=",         ":FzfLua spell_suggest<CR>" },
     {
       "<Leader>nv",
       ":FzfLua files cwd=" .. vim.fn.stdpath "config" .. "<CR>",
@@ -35,8 +28,8 @@ return {
     {
       "<Leader>fe",
       function()
-        local searched_ext = vim.fn.input "Extension: "
-        require("fzf-lua").files { cmd = "fd -e " .. searched_ext }
+        local query = vim.fn.input "Extension: "
+        require("fzf-lua").files { cmd = "fd -e " .. query }
       end,
     },
   },

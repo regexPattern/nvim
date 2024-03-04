@@ -1,8 +1,16 @@
 return {
-  "https://github.com/NvChad/nvim-colorizer.lua",
+  "NvChad/nvim-colorizer.lua",
+  event = "BufWinEnter",
   opts = {
+    filetypes = {
+      "*",
+      css = { name = true },
+      cmp_docs = { always_update = true },
+      cmp_menu = { always_update = true },
+    },
     user_default_options = {
-      tailwind = "lsp",
+      names = false,
+      tailwind = true,
     },
   },
 }
