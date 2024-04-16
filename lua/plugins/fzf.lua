@@ -12,7 +12,7 @@ return {
         preview = { hidden = "hidden" },
       },
       fzf_opts = { ["--layout"] = false },
-      file_icon_padding = " ",
+      file_icon_padding = "",
     })
 
     require("fzf-lua").register_ui_select()
@@ -29,7 +29,7 @@ return {
       "<Leader>fe",
       function()
         local query = vim.fn.input "Extension: "
-        require("fzf-lua").files { cmd = "fd -e " .. query }
+        require("fzf-lua").files { cmd = "fd --hidden -e" .. query }
       end,
     },
   },

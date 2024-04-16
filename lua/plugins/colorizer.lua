@@ -1,5 +1,6 @@
 return {
   "NvChad/nvim-colorizer.lua",
+  enabled = not vim.fn.exists("minimal"),
   event = "BufWinEnter",
   opts = {
     filetypes = {

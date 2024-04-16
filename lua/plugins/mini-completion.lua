@@ -1,0 +1,23 @@
+return {
+  "echasnovski/mini.completion",
+  event = "InsertEnter",
+  init = function()
+    vim.opt.shortmess = "FCtoclTO"
+    vim.opt.completeopt = "menuone,noinsert"
+
+    vim.keymap.set("i", "<Tab>", function()
+      if vim.fn.pumvisible() ~= 0 then
+        return "<C-y>"
+      else
+        return "<Tab>"
+      end
+    end, { expr = true })
+  end,
+  opts = {
+    lsp_completion = {
+      source_func = "omnifunc",
+      auto_setup = false,
+    },
+    set_vim_settings = false,
+  },
+}

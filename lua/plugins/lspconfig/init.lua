@@ -6,11 +6,11 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    enabled = not vim.fn.exists("minimal"),
     event = "BufReadPost",
     dependencies = {
       "mason",
       { "williamboman/mason-lspconfig.nvim", config = true },
-      "hrsh7th/cmp-nvim-lsp",
       "b0o/SchemaStore.nvim",
     },
     init = function()
@@ -20,9 +20,7 @@ return {
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           local config = require("plugins.lspconfig.server-configs")[server_name] or {}
-          require("lspconfig")[server_name].setup(vim.tbl_deep_extend("force", config, {
-            capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          }))
+          require("lspconfig")[server_name].setup(vim.tbl_deep_extend("force", config, {}))
         end,
       })
     end,
