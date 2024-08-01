@@ -1,23 +1,26 @@
-require("settings")
-require("mappings")
-require("diagnostics")
-require("autocommands")
+require "options"
+require "keymaps"
 
-local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazy_path) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazy_path,
-  })
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath }
 end
-vim.opt.rtp:prepend(lazy_path)
+vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+require("lazy").setup {
+  spec = { { import = "plugins" } },
   defaults = { lazy = true },
-  install = { colorscheme = { "default" } },
-  change_detection = { notify = false },
-})
+  change_detection = {
+    enabled = false,
+    notify = false,
+  },
+}
+
+vim.diagnostic.config {
+  float = { border = "single" },
+  severity_sort = true,
+}
+
+require "autocmds"
+require "colorscheme"

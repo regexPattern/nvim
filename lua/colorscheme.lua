@@ -1,0 +1,8 @@
+vim.cmd.colorscheme "default"
+vim.cmd.highlight "Normal guibg=NONE"
+vim.cmd.highlight "NormalFloat guibg=NONE"
+vim.cmd.highlight "DiagnosticUnderlineError gui=undercurl"
+vim.cmd.highlight "DiagnosticUnderlineWarn gui=undercurl"
+vim.cmd.highlight "DiagnosticUnderlineInfo gui=undercurl"
+vim.cmd.highlight "DiagnosticUnderlineHint gui=undercurl"
+vim.cmd.highlight "NetrwSpecialFile gui=bold,underline"

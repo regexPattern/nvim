@@ -1,6 +1,5 @@
 return {
-  "https://github.com/echasnovski/mini.surround",
-  event = { "BufReadPost", "BufNewFile" },
-  main = "mini.surround",
+  "echasnovski/mini.surround",
+  event = "BufReadPost",
   config = true,
 }

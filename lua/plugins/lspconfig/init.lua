@@ -1,47 +1,44 @@
 return {
   {
-    "williamboman/mason.nvim",
-    name = "mason",
-    config = true,
-  },
-  {
     "neovim/nvim-lspconfig",
-    enabled = not vim.fn.exists("minimal"),
-    event = "BufReadPost",
+    enabled = not vim.g.minimal,
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "mason",
-      { "williamboman/mason-lspconfig.nvim", config = true },
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "b0o/SchemaStore.nvim",
     },
-    init = function()
-      require("plugins.lspconfig.setup")
-    end,
     config = function()
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          local config = require("plugins.lspconfig.server-configs")[server_name] or {}
-          require("lspconfig")[server_name].setup(vim.tbl_deep_extend("force", config, {}))
-        end,
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        handlers = {
+          function(server_name)
+            local opts = require("plugins.lspconfig.server_configs")[server_name] or {}
+            require("lspconfig")[server_name].setup(opts)
+          end,
+        },
       })
+
+      require("plugins.lspconfig.setup")
     end,
   },
   {
     "j-hui/fidget.nvim",
+    enabled = not vim.g.minimal,
     event = "LspAttach",
     opts = {
       notification = {
-        view = { stack_upwards = false },
-        window = { winblend = 0 },
+        window = {
+          winblend = 0,
+          max_width = 60,
+        },
       },
     },
   },
   {
-    "stevearc/conform.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "mason", "zapling/mason-conform.nvim" },
-    config = function()
-      require("conform").setup()
-      require("mason-conform").setup()
-    end,
+    "felpafel/inlay-hint.nvim",
+    enabled = not vim.g.minimal,
+    event = "LspAttach",
+    config = true,
   },
 }
