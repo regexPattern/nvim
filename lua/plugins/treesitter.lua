@@ -15,18 +15,20 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "gnn",
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
+          init_selection = "<Leader>ts",
+          node_incremental = ">",
+          scope_incremental = "?",
+          node_decremental = "<",
         },
       },
     },
+    init = function()
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    end,
   },
   {
     "Darazaki/indent-o-matic",
-    enabled = not vim.g.minimal,
     event = "BufReadPost",
-    config = true,
+    opts = {},
   },
 }

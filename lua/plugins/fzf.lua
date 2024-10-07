@@ -1,7 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  enabled = not vim.g.minimal,
+  dependencies = { "mini.icons" },
   cmd = "FzfLua",
   event = "LspAttach",
   config = function()
@@ -12,7 +11,9 @@ return {
       winopts = {
         border = false,
         fullscreen = true,
-        preview = { hidden = "hidden" },
+        preview = {
+          hidden = "hidden",
+        },
       },
       keymap = {
         fzf = {
@@ -20,6 +21,9 @@ return {
           ["ctrl-q"] = "select-all+accept",
           ["ctrl-a"] = "beginning-of-line",
         },
+      },
+      defaults = {
+        file_icons = "mini",
       },
       files = {
         actions = {
@@ -36,7 +40,9 @@ return {
           end,
         },
       },
-      fzf_opts = { ["--layout"] = "default" },
+      fzf_opts = {
+        ["--layout"] = "default",
+      },
       file_icon_padding = " ",
     })
 
@@ -44,7 +50,17 @@ return {
   end,
   keys = {
     { "<Leader>ff", ":FzfLua files<CR>" },
+    { "<Leader>fb", ":FzfLua buffers<CR>" },
+    {
+      "<Leader>fe",
+      function()
+        vim.ui.input({ prompt = "Extension: " }, function(input)
+          require("fzf-lua").files({ fd_opts = "-e " .. input })
+        end)
+      end,
+    },
     { "<Leader>fg", ":FzfLua grep<CR>" },
+    { "=z",         ":FzfLua spell_suggest<CR>" },
     { "<Leader>fd", ":FzfLua files fd_opts=--type\\ d file_icons=false<CR>" },
     { "<Leader>nv", ":FzfLua files cwd=" .. vim.fn.stdpath("config") .. "<CR>" },
     { "<Leader>df", ":FzfLua files cwd=~/.dotfiles<CR>" },

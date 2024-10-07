@@ -1,5 +1,3 @@
-vim.g.netrw_list_hide = [[^\.git$]]
-vim.g.netrw_sort_sequence = [[[\/]$,*]]
-vim.g.netrw_special_syntax = true
+-- https://github.com/eiginn/netrw/blob/master/autoload/netrw_gitignore.vim
 
-vim.keymap.set("n", "<Leader>e", vim.cmd.Explore)
+-- vim.g.netrw_keepdir = 0

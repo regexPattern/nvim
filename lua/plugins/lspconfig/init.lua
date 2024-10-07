@@ -1,30 +1,33 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    enabled = not vim.g.minimal,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = { "mason.nvim" },
+      },
       "b0o/SchemaStore.nvim",
+      require("plugins.lspconfig.extra").plugins,
     },
     config = function()
-      require("mason").setup()
+      require("plugins.lspconfig.setup")
       require("mason-lspconfig").setup({
-        handlers = {
+        handlers = vim.tbl_deep_extend("force", {
           function(server_name)
-            local opts = require("plugins.lspconfig.server_configs")[server_name] or {}
+            if server_name == "tsserver" then
+              server_name = "ts_ls"
+            end
+
+            local opts = require("plugins.lspconfig.configs")[server_name] or {}
             require("lspconfig")[server_name].setup(opts)
           end,
-        },
+        }, require("plugins.lspconfig.extra").handlers),
       })
-
-      require("plugins.lspconfig.setup")
     end,
   },
   {
     "j-hui/fidget.nvim",
-    enabled = not vim.g.minimal,
     event = "LspAttach",
     opts = {
       notification = {
@@ -37,8 +40,7 @@ return {
   },
   {
     "felpafel/inlay-hint.nvim",
-    enabled = not vim.g.minimal,
     event = "LspAttach",
-    config = true,
+    opts = {},
   },
 }

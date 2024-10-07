@@ -1,6 +1,7 @@
+require("lspconfig.ui.windows").default_options.border = "single"
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
-    local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
     if not client then
@@ -8,26 +9,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+      vim.lsp.inlay_hint.enable(false, { buffer = true })
       vim.keymap.set("n", "<Leader>ti", function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ buffer = true }))
       end)
     end
 
-    -- vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-    vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+    vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
-    vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action)
-    vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-  end
+    vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, { buffer = true })
+    vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, { buffer = true })
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = true })
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = true })
+  end,
 })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = "single",
-    max_width = 80,
-    max_height = 20,
-  }
-)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "single",
+  max_width = 80,
+  max_height = 20,
+})

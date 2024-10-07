@@ -1,4 +1,4 @@
-local tsserver_inlay_hints = {
+local ts_ls_inlay_hints = {
   includeInlayParameterNameHints = "all",
   includeInlayParameterNameHintsWhenArgumentMatchesName = true,
   includeInlayFunctionParameterTypeHints = true,
@@ -13,6 +13,7 @@ return {
   lua_ls = {
     on_init = function(client)
       local path = client.workspace_folders[1].name
+      ---@diagnostic disable-next-line: undefined-field
       if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
         return
       end
@@ -21,8 +22,8 @@ return {
         runtime = { version = "LuaJIT" },
         workspace = {
           checkThirdParty = false,
-          library = { vim.env.VIMRUNTIME }
-        }
+          library = { vim.env.VIMRUNTIME },
+        },
       })
     end,
     settings = {
@@ -82,10 +83,10 @@ return {
     },
   },
 
-  tsserver = {
+  ts_ls = {
     settings = {
-      javascript = { inlayHints = tsserver_inlay_hints },
-      typescript = { inlayHints = tsserver_inlay_hints },
+      javascript = { inlayHints = ts_ls_inlay_hints },
+      typescript = { inlayHints = ts_ls_inlay_hints },
     },
   },
 }
