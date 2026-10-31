@@ -24,6 +24,15 @@ now(function ()
 end)
 
 now_if_args(function ()
+  add({
+    "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+    "https://github.com/3rd/image.nvim"
+  })
+  require("render-markdown").setup(require("config.render-markdown"))
+  require("image").setup(require("config.image"))
+end)
+
+now_if_args(function ()
   add({ "https://github.com/arborist-ts/arborist.nvim" })
   require("arborist").setup({})
 end)
