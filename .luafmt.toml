@@ -1,0 +1,6 @@
+[indent]
+kind = "Space"
+width = 2
+
+[output]
+quote_style = "Double"

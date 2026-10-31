@@ -1,0 +1,56 @@
+{
+  "plugins": {
+    "SchemaStore.nvim": {
+      "rev": "cc6302a0957806dfc0f2687f1f35ee9652686101",
+      "src": "https://github.com/b0o/SchemaStore.nvim"
+    },
+    "arborist.nvim": {
+      "rev": "1a6b2cb16c72641e1311ceb165feb6e4bf30c8fa",
+      "src": "https://github.com/arborist-ts/arborist.nvim"
+    },
+    "conform.nvim": {
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "fidget.nvim": {
+      "rev": "9e0201673e08e997e7cf52afca5565c70bd117f3",
+      "src": "https://github.com/j-hui/fidget.nvim"
+    },
+    "fzf-lua": {
+      "rev": "5b88d6f0af7fcb41d4a8bb340bf70d7e3824ee9d",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "mini.align": {
+      "rev": "a7f24f57e68a72fd6c19e442288ab835a9c40cdd",
+      "src": "https://github.com/nvim-mini/mini.align"
+    },
+    "mini.hues": {
+      "rev": "5fc2150b64562cd773c3f32e5f1b86f9ae2ec62f",
+      "src": "https://github.com/nvim-mini/mini.hues"
+    },
+    "mini.misc": {
+      "rev": "1e9cae4ee48176252a7ddee28133cf9764b74c58",
+      "src": "https://github.com/nvim-mini/mini.misc"
+    },
+    "mini.surround": {
+      "rev": "5357f00aca51a3b43e7775901b1ad9699f8c2678",
+      "src": "https://github.com/nvim-mini/mini.surround"
+    },
+    "nvim-highlight-colors": {
+      "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",
+      "src": "https://github.com/brenoprata10/nvim-highlight-colors"
+    },
+    "nvim-lspconfig": {
+      "rev": "d8d2fda7aae57030452ce8cd6e770b1eb704514e",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "oil.nvim": {
+      "rev": "d3733d933833a0e59b813ecec99341527adf0c28",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "real-icons.nvim": {
+      "rev": "9c13a7a3f3072fbceb847c8db15e941b60ea666f",
+      "src": "https://github.com/Mirsmog/real-icons.nvim"
+    }
+  }
+}
